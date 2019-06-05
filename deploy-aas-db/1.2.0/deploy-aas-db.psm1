@@ -131,6 +131,10 @@ function ApplySQLSecurity($Model, $Server, $Database, $UserName, $Password) {
             $credential.credential.Password = $Password
             $dataSource.credential = $credential.credential
         }
+        else {
+            $dataSource.connectionString = "Provider=SQLOLEDB.1;Data Source=" + $Server + ";User ID=" + $UserName + ";Password=" + $Password + ";Initial Catalog=" + $Database
+			$dataSource.impersonationMode = "impersonateServiceAccount"
+		}
     }
     return $Model
 }
